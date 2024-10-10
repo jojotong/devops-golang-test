@@ -1,0 +1,9 @@
+apiVersion: workload.jojotong.io.jojotong.io/v1
+kind: MyStatefulSet
+metadata:
+  labels:
+    app.kubernetes.io/name: devops-golang-test
+    app.kubernetes.io/managed-by: kustomize
+  name: mystatefulset-sample
+spec:
+  # TODO(user): Add fields here

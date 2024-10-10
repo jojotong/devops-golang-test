@@ -1,0 +1,23 @@
+# permissions for end users to view mystatefulsets.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: devops-golang-test
+    app.kubernetes.io/managed-by: kustomize
+  name: mystatefulset-viewer-role
+rules:
+- apiGroups:
+  - workload.jojotong.io.jojotong.io
+  resources:
+  - mystatefulsets
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - workload.jojotong.io.jojotong.io
+  resources:
+  - mystatefulsets/status
+  verbs:
+  - get
