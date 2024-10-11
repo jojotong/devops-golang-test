@@ -1,0 +1,15 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  labels:
+    {{- include "mystatefulset.labels" . | nindent 4 }}
+  name: {{ include "mystatefulset.fullname" . }}-leader-election-rolebinding
+  namespace: devops-golang-test-system
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: {{ include "mystatefulset.fullname" . }}-leader-election-role
+subjects:
+- kind: ServiceAccount
+  name: {{ include "mystatefulset.fullname" . }}-controller-manager
+  namespace: devops-golang-test-system

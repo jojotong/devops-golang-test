@@ -1,0 +1,25 @@
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: {{ include "mystatefulset.fullname" . }}-validating-webhook-configuration
+webhooks:
+- admissionReviewVersions:
+  - v1
+  clientConfig:
+    service:
+      name: {{ include "mystatefulset.fullname" . }}-webhook-service
+      namespace: {{ include "mystatefulset.fullname" . }}-system
+      path: /validate-workload-jojotong-io-jojotong-io-v1-mystatefulset
+  failurePolicy: Fail
+  name: vmystatefulset.kb.io
+  rules:
+  - apiGroups:
+    - workload.jojotong.io.jojotong.io
+    apiVersions:
+    - v1
+    operations:
+    - CREATE
+    - UPDATE
+    resources:
+    - mystatefulsets
+  sideEffects: None
